@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <style>
+      .wrapper {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      ul {
+        padding: 0;
+        margin: 0;
+      }
+
+      .block-1 {
+        padding: 25px;
+        border: 5px solid rgb(237, 164, 255);
+      }
+
+      .block-2 {
+        padding: 25px;
+        border: 5px solid rgb(164, 219, 255);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="block-1">
+        <h2>From free API</h2>
+        <ul class="list"></ul>
+      </div>
+
+      <div class="block-2">
+        <h2>From db.json</h2>
+        <ul class="list2"></ul>
+      </div>
+    </div>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
