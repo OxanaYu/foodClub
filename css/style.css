@@ -4,10 +4,17 @@ h2 {
 }
 
 .paraName {
+  color: rgb(9, 111, 35);
   font-size: 18px;
   font-weight: bold;
 }
 
 .imgRick {
   margin-bottom: 30px;
+}
+
+.wrapper {
+  background: url("https://images.unsplash.com/photo-1508161250369-a7ecbdfb67fe?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fGNocmlzdG1hc3xlbnwwfHwwfHx8MA%3D%3D")
+    no-repeat center center fixed;
+  background-size: cover;
 }
