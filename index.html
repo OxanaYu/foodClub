@@ -5,40 +5,278 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css" />
-    <style>
-      .wrapper {
-        display: flex;
-        justify-content: space-around;
-      }
-
-      ul {
-        padding: 0;
-        margin: 0;
-      }
-
-      .block-1 {
-        padding: 25px;
-        border: 5px solid rgb(237, 164, 255);
-      }
-
-      .block-2 {
-        padding: 25px;
-        border: 5px solid rgb(164, 219, 255);
-      }
-    </style>
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="src/img/favicon.png" type="image/x-icon" />
   </head>
 
   <body>
-    <div class="wrapper">
-      <div class="block-1">
-        <h2 style="color: rgb(9, 111, 35)">From free API</h2>
-        <ul class="list"></ul>
+    <div class="container">
+      <header class="header">
+        <img src="./img/logo.png" alt="Logo" class="header__logo" />
+
+        <!-- ! Форма поиска начинается здесь -->
+
+        <form class="search">
+          <input
+            type="text"
+            class="search__field"
+            placeholder="Search for a recipe here"
+          />
+          <button class="btn search__btn">
+            <svg class="search__icon">
+              <use href="./img/icons.svg#icon-search"></use>
+            </svg>
+            <span>Search</span>
+          </button>
+        </form>
+
+        <!-- ! Форма поиска заканчивается здесь -->
+
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <button class="nav__btn nav__btn--add-recipe">
+                <svg class="nav__icon">
+                  <use href="./img/icons.svg#icon-edit"></use>
+                </svg>
+                <span>Add recipe</span>
+              </button>
+            </li>
+            <li class="nav__item">
+              <button class="nav__btn nav__btn--bookmarks">
+                <svg class="nav__icon">
+                  <use href="./img/icons.svg#icon-bookmark"></use>
+                </svg>
+                <span>Bookmarks</span>
+              </button>
+              <div class="bookmarks">
+                <ul class="bookmarks__list">
+                  <div class="message">
+                    <div>
+                      <svg>
+                        <use href="./img/icons.svg#icon-smile"></use>
+                      </svg>
+                    </div>
+                    <p>
+                      No bookmarks yet. Find a nice recipe and bookmark it :)
+                    </p>
+                  </div>
+                  <!-- 
+                  <li class="preview">
+                    <a class="preview__link" href="#23456">
+                      <figure class="preview__fig">
+                        <img src="src/img/test-1.jpg" alt="Test" />
+                      </figure>
+                      <div class="preview__data">
+                        <h4 class="preview__name">
+                          Pasta with Tomato Cream ...
+                        </h4>
+                        <p class="preview__publisher">The Pioneer Woman</p>
+                      </div>
+                    </a>
+                  </li> 
+                --></ul>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <!-- ! Отображение результатов  -->
+
+      <div class="search-results">
+        <ul class="results">
+          <li class="preview">
+            <a class="preview__link preview__link--active" href="#23456">
+              <figure class="preview__fig">
+                <img src="./img/download.png" alt="Test" />
+              </figure>
+              <div class="preview__data">
+                <h4 class="preview__title">Pasta with Tomato Cream ...</h4>
+                <p class="preview__publisher">The Pioneer Woman</p>
+                <div class="preview__user-generated">
+                  <svg>
+                    <!-- <use href=""></use> -->
+                  </svg>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+
+        <!-- ! Пагинация -->
+
+        <div class="pagination">
+          <button class="btn--inline pagination__btn--prev">
+            <svg class="search__icon">
+              <use href="./img/icons.svg#icon-arrow-left"></use>
+            </svg>
+            <span>Previous</span>
+          </button>
+          <button class="btn--inline pagination__btn--next">
+            <span>Next</span>
+            <svg class="search__icon">
+              <use href="./img/icons.svg#icon-arrow-right"></use>
+            </svg>
+          </button>
+        </div>
+
+        <p class="footer_left"></p>
       </div>
 
-      <div class="block-2">
-        <h2 style="color: rgb(9, 111, 35)">From db.json</h2>
-        <ul class="list2"></ul>
+      <div class="recipe">
+        <div class="message">
+          <div>
+            <svg>
+              <use href="./img/icons.svg#icon-smile"></use>
+            </svg>
+          </div>
+          <p>Start by searching for a recipe or an ingredient. Have fun!</p>
+        </div>
+
+        <!-- <div class="spinner">
+          <svg>
+            <use href="src/img/icons.svg#icon-loader"></use>
+          </svg>
+        </div> -->
+
+        <!-- <div class="error">
+            <div>
+              <svg>
+                <use href="src/img/icons.svg#icon-alert-triangle"></use>
+              </svg>
+            </div>
+            <p>No recipes found for your query. Please try again!</p>
+          </div> -->
+
+        <!-- !========Начало отображения рецепта======== -->
+        <!--
+        <figure class="recipe__fig">
+          <img src="src/img/test-1.jpg" alt="Tomato" class="recipe__img" />
+          <h1 class="recipe__title">
+            <span>Pasta with tomato cream sauce</span>
+          </h1>
+        </figure>
+
+        <div class="recipe__details">
+          <div class="recipe__info">
+            <svg class="recipe__info-icon">
+              <use href="src/img/icons.svg#icon-clock"></use>
+            </svg>
+            <span class="recipe__info-data recipe__info-data--minutes">45</span>
+            <span class="recipe__info-text">minutes</span>
+          </div>
+          <div class="recipe__info">
+            <svg class="recipe__info-icon">
+              <use href="src/img/icons.svg#icon-users"></use>
+            </svg>
+            <span class="recipe__info-data recipe__info-data--people">4</span>
+            <span class="recipe__info-text">servings</span>
+
+            <div class="recipe__info-buttons">
+              <button class="btn--tiny btn--increase-servings">
+                <svg>
+                  <use href="src/img/icons.svg#icon-minus-circle"></use>
+                </svg>
+              </button>
+              <button class="btn--tiny btn--increase-servings">
+                <svg>
+                  <use href="src/img/icons.svg#icon-plus-circle"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="recipe__user-generated">
+            <svg>
+              <use href="src/img/icons.svg#icon-user"></use>
+            </svg>
+          </div>
+          <button class="btn--round">
+            <svg class="">
+              <use href="src/img/icons.svg#icon-bookmark-fill"></use>
+            </svg>
+          </button>
+         </div>  -->
+
+        <!-- !===========Конец отображения рецепта========== -->
       </div>
+    </div>
+
+    <div class="overlay hidden"></div>
+    <div class="add-recipe-window hidden">
+      <button class="btn--close-modal">&times;</button>
+      <form class="upload">
+        <div class="upload__column">
+          <h3 class="upload__heading">Recipe data</h3>
+          <label>Title</label>
+          <input value="TEST" required="" name="title" type="text" />
+          <label>URL</label>
+          <input value="TEST" required="" name="sourceUrl" type="text" />
+          <label>Image URL</label>
+          <input value="TEST" required="" name="image" type="text" />
+          <label>Publisher</label>
+          <input value="TEST" required="" name="publisher" type="text" />
+          <label>Prep time</label>
+          <input value="23" required="" name="cookingTime" type="number" />
+          <label>Servings</label>
+          <input value="23" required="" name="servings" type="number" />
+        </div>
+
+        <div class="upload__column">
+          <h3 class="upload__heading">Ingredients</h3>
+          <label>Ingredient 1</label>
+          <input
+            value="0.5,kg,Rice"
+            type="text"
+            required=""
+            name="ingredient-1"
+            placeholder="Format: 'Quantity,Unit,Description'"
+          />
+          <label>Ingredient 2</label>
+          <input
+            value="1,,Avocado"
+            type="text"
+            name="ingredient-2"
+            placeholder="Format: 'Quantity,Unit,Description'"
+          />
+          <label>Ingredient 3</label>
+          <input
+            value=",,salt"
+            type="text"
+            name="ingredient-3"
+            placeholder="Format: 'Quantity,Unit,Description'"
+          />
+          <label>Ingredient 4</label>
+          <input
+            type="text"
+            name="ingredient-4"
+            placeholder="Format: 'Quantity,Unit,Description'"
+          />
+          <label>Ingredient 5</label>
+          <input
+            type="text"
+            name="ingredient-5"
+            placeholder="Format: 'Quantity,Unit,Description'"
+          />
+          <label>Ingredient 6</label>
+          <input
+            type="text"
+            name="ingredient-6"
+            placeholder="Format: 'Quantity,Unit,Description'"
+          />
+        </div>
+
+        <button class="btn upload__btn">
+          <svg>
+            <use href="./img/icons.svg#icon-upload-cloud"></use>
+          </svg>
+          <span>Upload</span>
+        </button>
+      </form>
     </div>
     <script src="./js/main.js"></script>
   </body>
