@@ -8,8 +8,24 @@ let countPage = 1;
 let searchValue = "";
 let inpSearch = document.querySelector(".search__field");
 let resultsList = document.querySelector(".results");
-const searchBtn = document.querySelector(".search__btn");
+let searchBtn = document.querySelector(".search__btn");
 let listItem;
+let inpTitle = document.querySelector(".inpTitle");
+let inpUrl = document.querySelector(".inpUrl");
+let inpImg = document.querySelector(".inpImg");
+let inpPublisher = document.querySelector(".inpPublisher");
+let inpTime = document.querySelector(".inpTime");
+let inpServings = document.querySelector(".inpServings");
+let inpIngr1 = document.querySelector(".inpIngr1");
+let inpIngr2 = document.querySelector(".inpIngr2");
+let inpIngr3 = document.querySelector(".inpIngr3");
+let inpIngr4 = document.querySelector(".inpIngr4");
+let inpIngr5 = document.querySelector(".inpIngr5");
+let inpIngr6 = document.querySelector(".inpIngr6");
+let btnCloseModal = document.querySelector(".btn--close-modal");
+let btnDelete = document.querySelector(".btnDelete");
+let btnEdit = document.querySelector(".btnEdit");
+let elId;
 
 //! =======================READ======================
 
@@ -28,13 +44,13 @@ async function readRecipe(test = currentPage) {
     listItem.classList.add("result_item");
 
     listItem.innerHTML = `
-      <a class="preview__link" href="#${recipe.recipe.id}" data-id="${recipe.id}"  >
-        <figure class="preview__fig">
-          <img src="${recipe.recipe.image_url}" alt="${recipe.recipe.title}" />
+      <a class="preview__link" href="#${recipe.recipe.id}" id="${recipe.id}" data-id="${recipe.id}"  >
+        <figure id="${recipe.id}"   class="preview__fig">
+          <img id="${recipe.id}"  src="${recipe.recipe.image_url}" alt="${recipe.recipe.title}" />
         </figure>
-        <div class="preview__data">
-          <h4 class="preview__title">${recipe.recipe.title}</h4>
-          <p class="preview__publisher">${recipe.recipe.publisher}</p>
+        <div id="${recipe.id}"  class="preview__data">
+          <h4 id="${recipe.id}"  class="preview__title">${recipe.recipe.title}</h4>
+          <p id="${recipe.id}"  class="preview__publisher">${recipe.recipe.publisher}</p>
         </div>
       </a>
     `;
@@ -79,7 +95,7 @@ prevBtn.addEventListener("click", () => {
   if (currentPage <= 1) return;
   currentPage--;
   test++;
-  readRecipe();
+  readRecipe(currentPage);
 });
 
 nextBtn.addEventListener("click", async () => {
@@ -99,7 +115,7 @@ nextBtn.addEventListener("click", async () => {
     return;
   }
 
-  readRecipe();
+  readRecipe(currentPage);
 });
 
 // !====================Detailed view====================================
@@ -110,6 +126,8 @@ resultsList.addEventListener("click", (event) => {
   // Проверяем, был ли клик на элементе с классом "preview__link"
   const clickedListItem = event.target.closest(".preview__link");
   console.log(clickedListItem);
+  btnDelete = document.querySelector(".btnDelete");
+  btnEdit = document.querySelector(".btnEdit");
 
   if (clickedListItem) {
     // Получаем id рецепта из атрибута данных data-id
@@ -121,9 +139,11 @@ resultsList.addEventListener("click", (event) => {
       showRecipeDetails(recipeId);
     }
   }
+
+  btnDelete = document.querySelector(".btnDelete");
+  btnEdit = document.querySelector(".btnEdit");
 });
 
-// Функция для отображения детального обзора рецепта
 // Функция для отображения детального обзора рецепта
 function showRecipeDetails(recipeId) {
   fetch(`${API}/${recipeId}`)
@@ -139,6 +159,8 @@ function showRecipeDetails(recipeId) {
       if (data.recipe) {
         // Очищаем содержимое divRecipe
         divRecipe.innerHTML = "";
+        divRecipe.setAttribute("id", `${data.id}`);
+        console.log(data.id);
 
         // Создаем элементы для отображения детального обзора
         divRecipe.innerHTML = `
@@ -230,10 +252,24 @@ function showRecipeDetails(recipeId) {
               <use href="./img/icons.svg#icon-arrow-right"></use>
             </svg>
           </a>
-        </div>`;
-
-        // Добавляем информацию о рецепте, используя data без .recipe
-        // Например: data.publisher, data.ingredients и т.д.
+        </div>
+      
+        
+        `;
+        let divBtns = document.createElement("div");
+        divBtns.classList.add("btns_container");
+        btnDelete = document.createElement("button");
+        btnDelete.classList.add("delete");
+        btnDelete.classList.add("btnDelete");
+        btnDelete.innerText = "DELETE";
+        btnEdit = document.createElement("button");
+        btnEdit.classList.add("edit");
+        btnEdit.classList.add("btnEdit");
+        btnEdit.innerText = "EDIT";
+        divRecipe.append(divBtns);
+        divBtns.append(btnDelete, btnEdit);
+        btnDelete.setAttribute("id", `${data.id}`);
+        btnEdit.setAttribute("id", `${data.id}`);
       } else {
         console.error(`Recipe data not found for id ${recipeId}`);
       }
@@ -242,3 +278,173 @@ function showRecipeDetails(recipeId) {
       console.error("Error fetching recipe details:", error);
     });
 }
+
+// ! =============Create==== Добавляем рецепт =============================
+
+const addRecipeButton = document.querySelector(".nav__btn--add-recipe");
+const addRecipeWindow = document.querySelector(".add-recipe-window");
+const overlay = document.querySelector(".overlay");
+
+function createReceipe(newRecipe) {
+  fetch(API, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify(newRecipe),
+  });
+}
+
+addRecipeButton.addEventListener("click", () => {
+  addRecipeWindow.classList.toggle("hidden");
+  overlay.classList.toggle("hidden");
+});
+
+overlay.addEventListener("click", () => {
+  addRecipeWindow.classList.add("hidden");
+  overlay.classList.add("hidden");
+});
+
+btnCloseModal.addEventListener("click", () => {
+  addRecipeWindow.classList.toggle("hidden");
+  overlay.classList.toggle("hidden");
+});
+
+const recipeForm = document.querySelector(".upload");
+
+recipeForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  let newRecipe = {
+    recipe: {
+      publisher: inpPublisher.value,
+      ingredients: [
+        {
+          quantity: inpIngr1.value,
+          unit: inpIngr1.value,
+          description: inpIngr1.value,
+        },
+        {
+          quantity: inpIngr2.value,
+          unit: inpIngr2.value,
+          description: inpIngr2.value,
+        },
+        {
+          quantity: inpIngr3.value,
+          unit: inpIngr3.value,
+          description: inpIngr3.value,
+        },
+        {
+          quantity: inpIngr4.value,
+          unit: inpIngr4.value,
+          description: inpIngr4.value,
+        },
+        {
+          quantity: inpIngr5.value,
+          unit: inpIngr5.value,
+          description: inpIngr5.value,
+        },
+        {
+          quantity: inpIngr6.value,
+          unit: inpIngr6.value,
+          description: inpIngr6.value,
+        },
+      ],
+      source_url: inpUrl.value,
+      image_url: inpImg.value,
+      title: inpTitle.value,
+      servings: inpServings.value,
+      cooking_time: inpTime.value,
+    },
+  };
+  createReceipe(newRecipe);
+  readRecipe(currentPage);
+});
+
+// ! ================DELETE=================================
+
+document.addEventListener("click", (e) => {
+  let del_id = e.target.id;
+  console.log(e.target);
+  let del_class = [...e.target.classList];
+  console.log(del_class);
+
+  if (del_class.includes("btnDelete")) {
+    // Remove the recipe from the database
+    fetch(`${API}/${del_id}`, {
+      method: "DELETE",
+    }).then(() => readRecipe());
+
+    // Clear the detailed view
+    divRecipe.innerHTML = "";
+  }
+
+  // Add similar handling for the edit button if needed
+});
+
+//! ===========================EDIT============================
+// Добавьте следующие переменные в начало вашего скрипта
+const overlayEdit = document.querySelector("#overlay");
+const editRecipeModal = document.getElementById("editRecipeModal");
+const btnCloseEditModal = document.getElementById("btnCloseEditModal");
+const btnEditSave = document.getElementById("btnEditSave");
+
+btnEdit.addEventListener("click", () => {
+  overlayEdit.classList.add("openModalEdit");
+});
+
+// Обработчик события для кнопки редактирования
+resultsList.addEventListener("click", (e) => {
+  let edit_class = [...e.target.classList];
+  if (edit_class.includes("btnEdit")) {
+    let id = e.target.id;
+
+    // Получаем данные рецепта по id
+    fetch(`${API}/${id}`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Recipe with id ${id} not found`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        // Заполняем форму редактирования данными рецепта
+        document.querySelector(".inpEditTitle").value = data.recipe.title;
+        document.querySelector(".inpEditUrl").value = data.recipe.source_url;
+        document.querySelector(".inpEditImg").value = data.recipe.image_url;
+        document.querySelector(".inpEditPublisher").value =
+          data.recipe.publisher;
+        document.querySelector(".inpEditTime").value = data.recipe.cooking_time;
+        document.querySelector(".inpEditServings").value = data.recipe.servings;
+
+        // Заполняем ингредиенты
+        document.querySelector(".inpEditIngr1").value =
+          data.recipe.ingredients[0].description;
+        document.querySelector(".inpEditIngr2").value =
+          data.recipe.ingredients[1].description;
+        document.querySelector(".inpEditIngr3").value =
+          data.recipe.ingredients[2].description;
+        document.querySelector(".inpEditIngr4").value =
+          data.recipe.ingredients[3].description;
+        document.querySelector(".inpEditIngr5").value =
+          data.recipe.ingredients[4].description;
+        document.querySelector(".inpEditIngr6").value =
+          data.recipe.ingredients[5].description;
+
+        // Устанавливаем id для кнопки сохранения изменений
+        btnEditSave.setAttribute("data-id", id);
+
+        // Открываем модальное окно редактирования
+        editRecipeModal.classList.remove("hidden");
+        overlayEdit.classList.remove("hidden");
+      })
+      .catch((error) => {
+        console.error("Error fetching recipe details:", error);
+      });
+  }
+});
+
+// Обработчик события для кнопки закрытия модального окна редактирования
+btnCloseEditModal.addEventListener("click", () => {
+  editRecipeModal.classList.add("hidden-modal");
+  overlayEdit.classList.add("hidden-modal");
+});
