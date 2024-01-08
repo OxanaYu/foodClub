@@ -868,6 +868,11 @@ body {
   display: block;
 }
 
+#editRecipeModal {
+  width: 50%;
+  margin: 0 auto;
+}
+
 /* ! стили регистрации, логина и анимации */
 
 #loginForm {
