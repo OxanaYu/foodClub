@@ -5,71 +5,29 @@
         "publisher": "BBC Good Food",
         "ingredients": [
           {
-            "quantity": 300,
-            "unit": "g",
             "description": "basmati rice"
           },
           {
-            "quantity": 25,
-            "unit": "g",
             "description": "butter"
           },
           {
-            "quantity": 1,
-            "unit": "",
             "description": "large onion finely sliced"
           },
           {
-            "quantity": 1,
-            "unit": "",
             "description": "bay leaf"
           },
           {
-            "quantity": 3,
-            "unit": "",
             "description": "cardamom pods"
           },
           {
-            "quantity": null,
-            "unit": "",
             "description": "Small cinnamon stick"
-          },
-          {
-            "quantity": 1,
-            "unit": "tsp",
-            "description": "turmeric"
-          },
-          {
-            "quantity": 4,
-            "unit": "",
-            "description": "skinless chicken breasts cut into large chunks"
-          },
-          {
-            "quantity": 4,
-            "unit": "tbsps",
-            "description": "curry paste )"
-          },
-          {
-            "quantity": 85,
-            "unit": "g",
-            "description": "raisins"
-          },
-          {
-            "quantity": 850,
-            "unit": "ml",
-            "description": "chicken stock"
-          },
-          {
-            "quantity": null,
-            "unit": "",
-            "description": "Chopped coriander and toasted flaked almonds to serve"
           }
         ],
         "source_url": "http://www.bbcgoodfood.com/recipes/4686/chicken-biryani",
         "image_url": "http://forkify-api.herokuapp.com/images/4686_MEDIUM0e58.jpg",
-        "title": "Chicken biryani",
-        "servings": 4,
-        "cooking_time": 60
+        "title": "Chicken biryani edited",
+        "servings": "4",
+        "cooking_time": "60"
       },
       "id": "5ed6604691c37cdc054bd00c"
     },

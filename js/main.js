@@ -452,20 +452,22 @@ document.addEventListener("DOMContentLoaded", () => {
   btnEditSave.addEventListener("click", (event) => {
     event.preventDefault();
     let editRecipe = {
-      publisher: document.querySelector(".inpEditPublisher").value,
-      ingredients: [
-        { description: document.querySelector(".inpEditIngr1").value },
-        { description: document.querySelector(".inpEditIngr2").value },
-        { description: document.querySelector(".inpEditIngr3").value },
-        { description: document.querySelector(".inpEditIngr4").value },
-        { description: document.querySelector(".inpEditIngr5").value },
-        { description: document.querySelector(".inpEditIngr6").value },
-      ],
-      source_url: document.querySelector(".inpEditUrl").value,
-      image_url: document.querySelector(".inpEditImg").value,
-      title: document.querySelector(".inpEditTitle").value,
-      servings: document.querySelector(".inpEditServings").value,
-      cooking_time: document.querySelector(".inpEditTime").value,
+      recipe: {
+        publisher: document.querySelector(".inpEditPublisher").value,
+        ingredients: [
+          { description: document.querySelector(".inpEditIngr1").value },
+          { description: document.querySelector(".inpEditIngr2").value },
+          { description: document.querySelector(".inpEditIngr3").value },
+          { description: document.querySelector(".inpEditIngr4").value },
+          { description: document.querySelector(".inpEditIngr5").value },
+          { description: document.querySelector(".inpEditIngr6").value },
+        ],
+        source_url: document.querySelector(".inpEditUrl").value,
+        image_url: document.querySelector(".inpEditImg").value,
+        title: document.querySelector(".inpEditTitle").value,
+        servings: document.querySelector(".inpEditServings").value,
+        cooking_time: document.querySelector(".inpEditTime").value,
+      },
     };
 
     console.log("Edit Recipe Data:", editRecipe);
