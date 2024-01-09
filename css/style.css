@@ -761,6 +761,7 @@ body {
   align-items: center;
   gap: 1.5rem;
   display: grid;
+  max-height: 480px;
 }
 
 .upload__column label {
@@ -826,7 +827,7 @@ body {
 .edit {
   margin-left: 10px;
   margin-bottom: 20px;
-  padding: 5px 8px;
+  padding: 5px 9px;
   border-radius: 5px;
   background-color: rgb(160, 160, 5);
   font-weight: 900;
@@ -852,7 +853,7 @@ body {
 
 .edit-recipe-modal {
   background-color: #fff;
-  padding: 20px;
+  padding: 10px;
   border-radius: 8px;
   z-index: 1001;
   display: flex;
@@ -869,7 +870,7 @@ body {
 }
 
 #editRecipeModal {
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
 }
 
@@ -1063,9 +1064,13 @@ footer {
   }
 }
 
+/* .animateback {
+  display: block;
+} */
+
 /* АДАПТИВКА для страницы регистрации */
 
-@media only screen and (max-width: 728px) {
+/* @media only screen and (max-width: 728px) {
   .header__logo {
     display: flex;
     align-items: center;
@@ -1074,13 +1079,13 @@ footer {
   .animateback {
     display: block;
   }
-}
+} */
 
-@media only screen and (max-width: 400px) {
+/* @media only screen and (max-width: 400px) {
 }
 .animateback {
   display: none;
-}
+} */
 
 /* АДАПТИВКА для главной страницы */
 

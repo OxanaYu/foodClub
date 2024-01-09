@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let inpIngr6 = document.querySelector(".inpIngr6");
   let btnCloseModal = document.querySelector(".btn--close-modal");
   let btnDelete = document.querySelector(".btnDelete");
-  let btnEdit = document.querySelector(".btnEdit");
+  let editBtn;
 
   let elId;
 
@@ -264,16 +264,26 @@ document.addEventListener("DOMContentLoaded", () => {
           btnDelete.classList.add("delete");
           btnDelete.classList.add("btnDelete");
           btnDelete.innerText = "DELETE";
-          btnEdit = document.createElement("button");
-          btnEdit.classList.add("edit");
-          btnEdit.classList.add("btnEdit");
-          btnEdit.innerText = "EDIT";
+          editBtn = document.createElement("button");
+          editBtn.classList.add("edit");
+          editBtn.classList.add("btnEdit");
+          editBtn.innerText = "EDIT";
           divRecipe.append(divBtns);
           divBtns.append(btnDelete);
-          divBtns.append(btnEdit);
+          divBtns.append(editBtn);
           btnDelete.setAttribute("id", `${data.id}`);
-          btnEdit.setAttribute("id", `${data.id}`);
-          btnEdit = document.querySelector(".btnEdit");
+          editBtn.setAttribute("id", `${data.id}`);
+          editBtn.setAttribute("data-id", data.id);
+          // const localbtnEdit = document.querySelector(".btnEdit");
+          const localbtnEdit = document.querySelector(".btnEdit");
+          editBtn = localbtnEdit;
+
+          console.log(editBtn);
+
+          editBtn.addEventListener("click", () => {
+            editRecipeModal.style.display = "block";
+            overlayEdit.style.display = "block";
+          });
         } else {
           console.error(`Recipe data not found for id ${recipeId}`);
         }
@@ -370,7 +380,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let del_id = e.target.id;
     //console.log(e.target.id);
     let del_class = [...e.target.classList];
-    //console.log(del_class);
 
     if (del_class.includes("btnDelete")) {
       // Remove the recipe from the database
@@ -431,8 +440,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Устанавливаем id для кнопки сохранения изменений
           btnEditSave.setAttribute("data-id", data.id);
+
           console.log(data.id);
-          btnEdit.setAttribute("data-id", data.id);
         })
         .catch((error) => {
           console.error("Error fetching recipe details:", error);
@@ -440,7 +449,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  btnEditSave.addEventListener("click", () => {
+  btnEditSave.addEventListener("click", (event) => {
+    event.preventDefault();
     let editRecipe = {
       publisher: document.querySelector(".inpEditPublisher").value,
       ingredients: [
@@ -457,28 +467,32 @@ document.addEventListener("DOMContentLoaded", () => {
       servings: document.querySelector(".inpEditServings").value,
       cooking_time: document.querySelector(".inpEditTime").value,
     };
+
+    console.log("Edit Recipe Data:", editRecipe);
+    console.log("Recipe ID:", btnEditSave.id);
+
     editRecipeFunc(editRecipe, btnEditSave.id);
     console.log(btnEditSave.id);
   });
 
   function editRecipeFunc(editRecipe, id) {
+    console.log(`${API}/${id}`);
     fetch(`${API}/${id}`, {
       method: "PATCH",
       headers: {
         "Content-type": "application/json; charset=utf-8",
       },
       body: JSON.stringify(editRecipe),
-    }).then(() => readRecipe());
-    console.log(`${API}/${id}`);
+    }).then(() => readRecipe(currentPage));
   }
 
-  divRecipe.addEventListener("click", () => {
-    editRecipeModal.style.display = "block";
-    overlayEdit.style.display = "block";
-  });
+  // editBtn.addEventListener("click", () => {
+  //   editRecipeModal.style.display = "block";
+  //   overlayEdit.style.display = "block";
+  // });
   // Обработчик события для кнопки закрытия модального окна редактирования
   btnCloseEditModal.addEventListener("click", () => {
-    editRecipeModal.classList.add("hidden-modal");
-    overlayEdit.classList.add("hidden-modal");
+    editRecipeModal.style.display = "none";
+    overlayEdit.style.display = "none";
   });
 });

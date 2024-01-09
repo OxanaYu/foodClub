@@ -127,7 +127,7 @@
             // Redirect to another page (e.g., index.html)
             window.location.href = "./index.html";
           } else {
-            alert("Invalid credentials");
+            alert("Wrong login or password");
           }
         }
 
@@ -166,8 +166,6 @@
           document.getElementById("loginForm").style.display = "block";
           document.getElementById("registrationForm").style.display = "none";
         }
-
-        // НАЧАЛО АНИМАЦИИ ПИЦЦА
         ("use strict");
 
         let toRadians = (deg) => (deg * Math.PI) / 180;
@@ -284,6 +282,8 @@
           ctx.lineCap = "round";
 
           let percentage = map(d, 15, 70, 1.2, 0.2);
+
+          let tx = x1 + (x2 - x1) * percentage;
           let ty = y1 + (y2 - y1) * percentage;
           ctx.moveTo(x1, y1);
           ctx.lineTo(tx, ty);
