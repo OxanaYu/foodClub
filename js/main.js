@@ -394,9 +394,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //! ===========================EDIT============================
   const overlayEdit = document.querySelector("#overlay");
-  const editRecipeModal = document.getElementById("editRecipeModal");
-  const btnCloseEditModal = document.getElementById("btnCloseEditModal");
-  const btnEditSave = document.getElementById("btnEditSave");
+  const editRecipeModal = document.querySelector("#editRecipeModal");
+  const btnCloseEditModal = document.querySelector("#btnCloseEditModal");
+  const btnEditSave = document.querySelector("#btnEditSave");
 
   // Обработчик события для кнопки редактирования
   document.addEventListener("click", (e) => {
