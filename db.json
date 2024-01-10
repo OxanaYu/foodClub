@@ -4617,71 +4617,29 @@
         "publisher": "The Pioneer Woman",
         "ingredients": [
           {
-            "quantity": 1,
-            "unit": "",
             "description": "stick butter divided"
           },
           {
-            "quantity": 1,
-            "unit": "",
             "description": "whole onion finely diced"
           },
           {
-            "quantity": 1,
-            "unit": "",
             "description": "whole carrot finely diced"
           },
           {
-            "quantity": 1,
-            "unit": "",
             "description": "stalk celery finely diced"
           },
           {
-            "quantity": 1,
-            "unit": "",
             "description": "whole cauliflower heads"
           },
           {
-            "quantity": 2,
-            "unit": "tbsps",
             "description": "fresh or dried parsley chopped"
-          },
-          {
-            "quantity": 2,
-            "unit": "",
-            "description": "quarts low-sodium chicken broth or stock"
-          },
-          {
-            "quantity": 6,
-            "unit": "tbsps",
-            "description": "all-purpose flour"
-          },
-          {
-            "quantity": 2,
-            "unit": "cups",
-            "description": "whole milk"
-          },
-          {
-            "quantity": 1,
-            "unit": "cup",
-            "description": "half-and-half"
-          },
-          {
-            "quantity": 2,
-            "unit": "tsps",
-            "description": "to 4 tsps salt to taste"
-          },
-          {
-            "quantity": 1,
-            "unit": "cup",
-            "description": "sour cream room temperature"
           }
         ],
         "source_url": "http://thepioneerwoman.com/cooking/2009/01/cauliflower-soup/",
         "image_url": "http://forkify-api.herokuapp.com/images/cauliflowersoupb21e.jpg",
-        "title": "Cauliflower Soup",
-        "servings": 4,
-        "cooking_time": 60
+        "title": "Cauliflower Soup added edited",
+        "servings": "4",
+        "cooking_time": "60"
       },
       "id": "5ed6604591c37cdc054bccd7"
     },

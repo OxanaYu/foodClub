@@ -425,23 +425,12 @@ document.addEventListener("DOMContentLoaded", () => {
             data.recipe.servings;
 
           // Заполняем ингредиенты
-          document.querySelector(".inpEditIngr1").value =
-            data.recipe.ingredients[0].description;
-          document.querySelector(".inpEditIngr2").value =
-            data.recipe.ingredients[1].description;
-          document.querySelector(".inpEditIngr3").value =
-            data.recipe.ingredients[2].description;
-          document.querySelector(".inpEditIngr4").value =
-            data.recipe.ingredients[3].description;
-          document.querySelector(".inpEditIngr5").value =
-            data.recipe.ingredients[4].description;
-          document.querySelector(".inpEditIngr6").value =
-            data.recipe.ingredients[5].description;
-
+          [...new Array(6).keys()].forEach((dom) => {
+            document.querySelector(`.inpEditIngr${dom + 1}`).value =
+              data.recipe.ingredients[dom].description;
+          });
           // Устанавливаем id для кнопки сохранения изменений
           btnEditSave.setAttribute("data-id", data.id);
-
-          console.log(data.id);
         })
         .catch((error) => {
           console.error("Error fetching recipe details:", error);
@@ -454,14 +443,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let editRecipe = {
       recipe: {
         publisher: document.querySelector(".inpEditPublisher").value,
-        ingredients: [
-          { description: document.querySelector(".inpEditIngr1").value },
-          { description: document.querySelector(".inpEditIngr2").value },
-          { description: document.querySelector(".inpEditIngr3").value },
-          { description: document.querySelector(".inpEditIngr4").value },
-          { description: document.querySelector(".inpEditIngr5").value },
-          { description: document.querySelector(".inpEditIngr6").value },
-        ],
+        ingredients: [...new Array(6).keys()].map((dom) => ({
+          description: document.querySelector(`.inpEditIngr${dom + 1}`).value,
+        })),
         source_url: document.querySelector(".inpEditUrl").value,
         image_url: document.querySelector(".inpEditImg").value,
         title: document.querySelector(".inpEditTitle").value,
@@ -469,12 +453,10 @@ document.addEventListener("DOMContentLoaded", () => {
         cooking_time: document.querySelector(".inpEditTime").value,
       },
     };
+    // Получаем id рецепта, который надо передать в функцию сохранения
+    const id = btnEditSave.getAttribute("data-id");
 
-    console.log("Edit Recipe Data:", editRecipe);
-    console.log("Recipe ID:", btnEditSave.id);
-
-    editRecipeFunc(editRecipe, btnEditSave.id);
-    console.log(btnEditSave.id);
+    editRecipeFunc(editRecipe, id);
   });
 
   function editRecipeFunc(editRecipe, id) {
@@ -488,13 +470,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }).then(() => readRecipe(currentPage));
   }
 
-  // editBtn.addEventListener("click", () => {
-  //   editRecipeModal.style.display = "block";
-  //   overlayEdit.style.display = "block";
-  // });
-  // Обработчик события для кнопки закрытия модального окна редактирования
-  btnCloseEditModal.addEventListener("click", () => {
-    editRecipeModal.style.display = "none";
-    overlayEdit.style.display = "none";
-  });
+  /**
+   * При нажатии на кнопки (закрыть/сохранить) закрывается окно с редактированием рецепта
+   */
+  [btnEditSave, btnCloseEditModal].forEach((btn) =>
+    btn.addEventListener("click", () => {
+      editRecipeModal.style.display = "none";
+      overlayEdit.style.display = "none";
+    })
+  );
 });
